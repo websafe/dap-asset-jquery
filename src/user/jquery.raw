@@ -1,0 +1,42 @@
+#!/usr/local/bin/php
+<?php
+/**
+ * websafe-dap-asset-jquery (http://github.com/websafe/dap-asset-jquery/)
+ *
+ * Enables panel-wide jQuery (2.x) and jQuery legacy (1.x) for use in
+ * DirectAdmin plugins and skins.
+ *
+ * @link http://github.com/websafe/dap-asset-jquery.git 
+ * @author Thomas Szteliga <ts@websafe.pl>
+ * @copyright 2015 WEBSAFE.PL Thomas Szteliga <https://websafe.pl/>
+ * @license http://github.com/websafe/dap-asset-jquery/blob/master/LICENSE MIT
+ * @since File available since Release 0.0.1
+ */
+
+// Send `application/javascript` header
+echo "HTTP/1.1 200 OK\r\n";
+echo "Content-Type: application/javascript\r\n";
+echo "\r\n";
+
+// Extract request params
+parse_str(getenv('QUERY_STRING'), $requestParams);
+
+// assets path prefix
+$assetsPathPrefix = 'plugins/websafe-dap-asset-jquery/assets/jquery';
+
+// Default assets path suffix
+$pathSuffix = '';
+
+// Check if version was set in url
+if(array_key_exists('version', $requestParams)) {
+    // and if it's 'legacy'
+    if('legacy' === $requestParams['version']) {
+        $pathSuffix = '-legacy';
+    }
+}
+
+// Load the requested jQuery version based on the value of $pathSuffix
+readfile($assetsPathPrefix . $pathSuffix . '/jquery.min.js');
+
+//
+exit;
