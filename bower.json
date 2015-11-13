@@ -1,0 +1,36 @@
+{
+    "name": "websafe-dap-asset-jquery",
+    "description": "A DirectAdmin Plugin providing panel-wide access to jQuery in plugins and skins.",
+    "main": "",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "keywords": [
+        "DirectAdmin",
+        "plugin",
+        "asset",
+        "jQuery"
+    ],
+    "authors": [
+        {
+            "name": "Thomas Szteliga",
+            "email": "ts@websafe.pl",
+            "homepage": "https://websafe.pl/"
+        }
+    ],
+    "homepage": "https://websafe.pl/",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/websafe/dap-asset-jquery.git"
+    },
+    "dependencies": {
+        "jquery": "~2.1.4",
+        "jquery-legacy": "jquery#1"
+    },
+    "private": true
+}
