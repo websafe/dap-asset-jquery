@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="websafe-dap-asset-jquery" basedir="." default="">
+    
+    <property file="${basedir}/build.properties"/>
+
+    <!-- ##################################################################  -->
+    
+    <target name="clean-node_modules-dir">
+        <delete dir="${node_modules.dir}" />
+    </target>    
+
+    <target name="clean-bower_components-dir">
+        <delete dir="${bower_components.dir}" />
+    </target>    
+
+    <target name="clean-dist-dir">
+        <delete dir="${dist.dir}" />
+    </target>    
+
+    <target name="clean-build-dir">
+        <delete dir="${build.dir}" />
+    </target>    
+
+    <target name="clean-release-dir">
+        <delete dir="${release.dir}" />
+    </target>    
+
+    <target name="clean-all">
+        <antcall target="clean-node_modules-dir"></antcall>
+        <antcall target="bower_components-dir"></antcall>
+        <antcall target="clean-dist-dir"></antcall>
+        <antcall target="clean-build-dir"></antcall>
+        <antcall target="release-dir"></antcall>
+    </target>    
+
+    <!-- ##################################################################  -->
+
+    <target name="update-version">
+        <replaceregexp byline="true">
+            <regexp pattern='"version": "(.*)"'/>
+            <substitution expression='"version": "${project.version}"'/>
+            <fileset dir=".">
+                <include name="package.json"/>
+            </fileset>
+        </replaceregexp>
+        <replaceregexp byline="true">
+            <regexp pattern='version=(.*)'/>
+            <substitution expression='version=${project.version}'/>
+            <fileset dir="src">
+                <include name="plugin.conf"/>
+            </fileset>
+        </replaceregexp>
+    </target>
+
+    <target name="update-urls">
+        <replaceregexp byline="true">
+            <regexp pattern='version_url=(.*)'/>
+            <substitution expression='version_url=${project.version.url}'/>
+            <fileset dir="src">
+                <include name="plugin.conf"/>
+            </fileset>
+        </replaceregexp>
+        <replaceregexp byline="true">
+            <regexp pattern='update_url=(.*)'/>
+            <substitution expression='update_url=${project.update.url}'/>
+            <fileset dir="src">
+                <include name="plugin.conf"/>
+            </fileset>
+        </replaceregexp>
+    </target>
+
+    <!-- ##################################################################  -->
+
+    <target name="run-npm-install">
+        <exec executable="npm" dir="." failonerror="true">
+            <arg  value="--verbose" />
+            <arg  value="install" />
+        </exec>
+    </target>    
+
+    <target name="run-bower-install">
+        <exec executable="node_modules/.bin/bower" dir="." failonerror="true">
+            <arg  value="--verbose" />
+            <arg  value="update" />
+        </exec>
+    </target>
+
+    <target name="run-grunt">
+        <exec executable="node_modules/.bin/grunt" dir="." failonerror="true">
+        </exec>
+    </target>
+
+    <!-- ##################################################################  -->
+
+    <target name="set-dist-permissions">
+        <chmod type="dir" perm="755">
+            <dirset dir="${dist.dir}"></dirset>
+        </chmod>
+        <chmod type="file" perm="644">
+            <fileset dir="${dist.dir}"></fileset>
+        </chmod>
+        <chown owner="diradmin">
+            <dirset dir="${dist.dir}"></dirset>
+            <fileset dir="${dist.dir}"></fileset>
+        </chown>
+        <chgrp group="diradmin">
+            <dirset dir="${dist.dir}"></dirset>
+            <fileset dir="${dist.dir}"></fileset>
+        </chgrp>
+    </target>
+
+    <!-- ##################################################################  -->
+
+    <target name="create-release-tarball">
+        <delete
+            file="${release.dir}/${project.name}-${project.version}.tar"
+        />
+        <delete
+            file="${release.dir}/${project.name}-${project.version}.tar.gz"
+        />
+        <tar
+            basedir="${dist.dir}"
+            destfile="${release.dir}/${project.name}-${project.version}.tar"
+        />
+        <gzip
+            src="${release.dir}/${project.name}-${project.version}.tar"
+            destfile="${release.dir}/${project.name}-${project.version}.tar.gz"
+        />
+        <delete
+            file="${release.dir}/${project.name}-${project.version}.tar"
+        />
+    </target>
+
+    <target name="create-release-checksums">
+        <checksum
+            format="MD5SUM"
+            file="${release.dir}/${project.name}-${project.version}.tar.gz"
+            forceOverwrite="yes"
+            fileext=".md5"
+        />
+        <checksum
+            algorithm="MD5"
+            format="MD5SUM"
+            file="${release.dir}/${project.name}-${project.version}.tar.gz"
+            forceOverwrite="yes"
+            fileext=".md5"
+        />
+        <checksum
+            algorithm="SHA"
+            format="MD5SUM"
+            file="${release.dir}/${project.name}-${project.version}.tar.gz"
+            forceOverwrite="yes"
+            fileext=".sha"
+        />
+        <checksum
+            algorithm="SHA-512"
+            format="MD5SUM"
+            file="${release.dir}/${project.name}-${project.version}.tar.gz"
+            forceOverwrite="yes"
+            fileext=".sha512"
+        />
+    </target>
+
+    <!-- ##################################################################  -->
+
+    <target name="clean">
+        <antcall target="clean-all"></antcall>
+    </target>
+
+    <target name="setup">
+        <antcall target="run-npm-install"></antcall>
+        <antcall target="run-bower-install"></antcall>
+    </target>
+
+    <target name="build">
+        <antcall target="clean-dist-dir"></antcall>
+        <antcall target="clean-build-dir"></antcall>
+        <antcall target="update-version"></antcall>
+        <antcall target="update-urls"></antcall>
+        <antcall target="run-grunt"></antcall>
+        <antcall target="set-dist-permissions"></antcall>
+    </target>
+
+    <target name="release">
+        <antcall target="create-release-tarball"></antcall>
+        <antcall target="create-release-checksums"></antcall>
+        <echo file="${release.dir}/VERSION.TXT">${project.version}</echo>
+    </target>
+   
+</project>
