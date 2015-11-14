@@ -8,7 +8,10 @@
         "node_modules",
         "bower_components",
         "test",
-        "tests"
+        "tests",
+        "build",
+        "dist",
+        "release"
     ],
     "keywords": [
         "DirectAdmin",
@@ -23,7 +26,7 @@
             "homepage": "https://websafe.pl/"
         }
     ],
-    "homepage": "https://websafe.pl/",
+    "homepage": "https://github.com/websafe/dap-asset-jquery",
     "repository": {
         "type": "git",
         "url": "git://github.com/websafe/dap-asset-jquery.git"
