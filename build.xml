@@ -28,10 +28,10 @@
 
     <target name="clean-all">
         <antcall target="clean-node_modules-dir"></antcall>
-        <antcall target="bower_components-dir"></antcall>
+        <antcall target="clean-bower_components-dir"></antcall>
         <antcall target="clean-dist-dir"></antcall>
         <antcall target="clean-build-dir"></antcall>
-        <antcall target="release-dir"></antcall>
+        <antcall target="clean-release-dir"></antcall>
     </target>    
 
     <!-- ##################################################################  -->
