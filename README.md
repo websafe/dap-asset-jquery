@@ -1,5 +1,5 @@
-websafe's DirectAdmin plugin Asset - jQuery
-===========================================
+DirectAdmin plugin Asset - jQuery
+=================================
 
 A [DirectAdmin] plugin providing panel-wide access to [jQuery] in plugins
 and skins. Use this plugin when your other plugins and|or skins require
@@ -33,8 +33,8 @@ node_modules/.bin/grunt
 
 
 
-Using in DirectAdmin plugins and skins
---------------------------------------
+Using in plugins and skins
+--------------------------
 
 Embed jQuery 2.x:
 
