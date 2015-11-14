@@ -17,7 +17,7 @@ cd dap-asset-jquery
 ant clean
 ant setup
 ant build
-ant release
+sudo ant release
 ~~~~
 
 
