@@ -179,10 +179,10 @@
         <antcall target="update-version"></antcall>
         <antcall target="update-urls"></antcall>
         <antcall target="run-grunt"></antcall>
-        <antcall target="set-dist-permissions"></antcall>
     </target>
 
     <target name="release">
+        <antcall target="set-dist-permissions"></antcall>
         <antcall target="create-release-tarball"></antcall>
         <antcall target="create-release-checksums"></antcall>
         <echo file="${release.dir}/VERSION.TXT">${project.version}</echo>
