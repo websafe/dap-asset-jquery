@@ -11,7 +11,7 @@ Building
 
 ### Building with Ant
 
-~~~~
+~~~~ shell
 git clone https://github.com/websafe/dap-asset-jquery.git
 cd dap-asset-jquery
 ant clean
@@ -23,7 +23,7 @@ sudo ant release
 
 ### Building without Ant
 
-~~~~
+~~~~ shell
 git clone https://github.com/websafe/dap-asset-jquery.git
 cd dap-asset-jquery
 npm install
@@ -38,14 +38,14 @@ Using in plugins and skins
 
 Embed jQuery 2.x:
 
-~~~~
+~~~~ html
 <script src="/CMD_PLUGINS/websafe-dap-asset-jquery/jquery.raw"></script>
 ~~~~
 
 
 Embed jQuery 1.x:
 
-~~~~
+~~~~ html
 <script src="/CMD_PLUGINS/websafe-dap-asset-jquery/jquery.raw?version=legacy"></script>
 ~~~~
 
