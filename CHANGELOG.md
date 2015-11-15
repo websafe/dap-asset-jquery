@@ -1,5 +1,12 @@
 # Change Log
 
+
+## [0.3.6] - 2015-11-15
+### Changed
+ - Updated `scripts/update.sh` - now it does basically the same as 
+   `scripts/install.sh`, so updates should work as expected.
+
+
 ## [0.3.5] - 2015-11-14
 ### Changed
  - Updated `README.md`.
