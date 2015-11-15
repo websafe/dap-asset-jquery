@@ -1,7 +1,7 @@
 {
     "name": "websafe-dap-asset-jquery",
     "title": "DirectAdmin Plugin - Asset - jQuery",
-    "version": "0.3.5",
+    "version": "0.3.6",
     "description": "A DirectAdmin Plugin providing panel-wide access to jQuery in plugins and skins.",
     "devDependencies": {
         "bower": "^1.6.5",
